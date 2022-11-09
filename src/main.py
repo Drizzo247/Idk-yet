@@ -46,9 +46,13 @@ while True:
                 pygame.quit()  # Un-inits pygame.
                 exit(0)  # Safer than `break`.
                                 #cornet's                            
-    if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_SPACE:
-            player_gravity = -20
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                player_gravity = -20
+                
+                #player 
+                player_gravity += -20
+                player_retc.y += player_gravity
         
 
         #if event.type == pygame.MOUSEMOTION:
