@@ -34,6 +34,7 @@ player_surface = pygame.image.load("Sprites/player_stand.png").convert_alpha()
 player_retc = player_surface.get_rect( midbottom  = (80,300))
 
 score_rect = score_surface.get_rect(center=(400,50))
+player_gravity = 0
 
 
 #main loop
@@ -44,7 +45,11 @@ while True:
             case pygame.QUIT:
                 pygame.quit()  # Un-inits pygame.
                 exit(0)  # Safer than `break`.
-                                #cornet's
+                                #cornet's                            
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_SPACE:
+            player_gravity = -20
+        
 
         #if event.type == pygame.MOUSEMOTION:
             #if player_retc.collidepoint(event.pos): print('collision')
@@ -53,6 +58,7 @@ while True:
         #puts it on the screen   #highlets it pink #makes the my game pink
                                         #parceley makes it pink
         pygame.draw.rect(screen,'#c0e8ec',score_rect,100)
+        
 
 
 
