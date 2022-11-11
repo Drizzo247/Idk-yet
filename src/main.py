@@ -1,5 +1,4 @@
-from platform import python_branch
-from tkinter import CENTER
+
 import pygame
 from sys import exit
 # Display Surface/ The Game window. anything displayed gose on here
