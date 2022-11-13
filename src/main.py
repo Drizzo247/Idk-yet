@@ -33,7 +33,7 @@ player_surface = pygame.image.load("Sprites/player_stand.png").convert_alpha()
 player_retc = player_surface.get_rect( midbottom  = (80,300))
 
 score_rect = score_surface.get_rect(center=(400,50))
-player_gravity = 0
+player_gravity = 20 
 
 
 #main loop
@@ -47,12 +47,10 @@ while True:
                                 #cornet's                            
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                player_gravity = -20
-                
-                #player 
-                player_gravity += -20
+                player_gravity = 20
                 player_retc.y += player_gravity
-        
+                 
+                
 
         #if event.type == pygame.MOUSEMOTION:
             #if player_retc.collidepoint(event.pos): print('collision')
