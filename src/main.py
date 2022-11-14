@@ -28,49 +28,59 @@ ground_surface = pygame.image.load("Sprites/ground.png").convert_alpha()
 snail_surface = pygame.image.load("Sprites/snail1.png").convert_alpha()
 snail_rec = snail_surface.get_rect( bottomright= (600,300))
 
-player_surface = pygame.image.load("Sprites/player_stand.png").convert_alpha()
+player_surface = pygame.image.load("Sprites/player_walk.png").convert_alpha()
               #make a rectangle                 #x #y
 player_retc = player_surface.get_rect( midbottom  = (80,300))
 
 score_rect = score_surface.get_rect(center=(400,50))
-player_gravity = 20 
+player_gravity = 0
 
 
 #main loop
 while True:
     #event loop
     for event in pygame.event.get():
-        match event.type:
-            case pygame.QUIT:
-                pygame.quit()  # Un-inits pygame.
-                exit(0)  # Safer than `break`.
-                                #cornet's                            
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+            
+        
+         
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                player_gravity = 20
-                player_retc.y += player_gravity
+                #controls how heigh it gose up
+             player_gravity = -20
+            player_retc.y += player_gravity
+               
+                 
+        
                  
                 
 
-        #if event.type == pygame.MOUSEMOTION:
-            #if player_retc.collidepoint(event.pos): print('collision')
-        screen.blit(sky_surface,(0,0))    # Add surface to the screen.
-        screen.blit(ground_surface,(0,300))
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if player_retc.collidepoint(event.pos):
+                player_gravity = -20
+                player_retc.y += player_gravity
+               
+                 
+    screen.blit(sky_surface,(0,0))    # Add surface to the screen.
+    screen.blit(ground_surface,(0,300))
         #puts it on the screen   #highlets it pink #makes the my game pink
                                         #parceley makes it pink
-        pygame.draw.rect(screen,'#c0e8ec',score_rect,100)
+    pygame.draw.rect(screen,'#c0e8ec',score_rect,100)
         
 
 
 
-        screen.blit(score_surface,score_rect)
+    screen.blit(score_surface,score_rect)
 
-        snail_rec.x -=1
-        screen.blit(snail_surface,(snail_rec))
-        player_retc.left += 1
-        if snail_rec.right <= 0: snail_rec.left = 800
+    snail_rec.x -=1
+    screen.blit(snail_surface,(snail_rec))
+    player_retc.left += 1
+    if snail_rec.right <= 0: snail_rec.left = 800
                                  #left #right
-        screen.blit(player_surface,(player_retc))
+    screen.blit(player_surface,(player_retc))
+
         #erither get false or true  if get flase no conllison and if get true has conllison
     # if  player_retc.colliderect(snail_rec):
        # print ('collision')
@@ -87,6 +97,8 @@ while True:
     clock.tick(60)
     #prints fps in terminal
     print(clock)
+    
+    
 
 
 

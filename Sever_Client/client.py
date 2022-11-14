@@ -1,31 +1,31 @@
 import socket
 
+HEADER = 64
+PORT = 5050
+FORMAT = 'utf-8'
+DISCONNECT_MESSAGE = "!DISCONNECT"
+SERVER = ("10.0.0.168")
+ADDR = (SERVER, PORT)
 
-def server_program():
-    # get the hostname
-    host = ('10.202.22.126')
-    port = 5400  # initiate port no above 1024
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(SERVER)
 
-    server_socket = socket.socket()  # get instance
-    # look closely. The bind() function takes tuple as argument
-    server_socket.bind((host, port))  # bind host address and port together
+def send(msg):
+    message = msg.encode(FORMAT)
+    msg_length = len(message)
+    send_length = str(msg_length).encode(FORMAT)
+    send_length += b' ' * (HEADER - len(send_length))
+    client.send(send_length)
+    client.send(message)
 
-    # configure how many client the server can listen simultaneously
-    server_socket.listen(2)
-    conn, address = server_socket.accept()  # accept new connection
-    print("Connection from: " + str(address))
-    while True:
-        # receive data stream. it won't accept data packet greater than 1024 bytes
-        data = conn.recv(1024).decode()
-        if not data:
-            # if data is not received break
-            break
-        print("from connected user: " + str(data))
-        data = input(' -> ')
-        conn.send(data.encode())  # send data to the client
+while True:
+    DATA = client.recv(2048).decode(FORMAT)
+    if not DATA: break
+    print("GOT: %s" %DATA)
 
-    conn.close()  # close the connection
+    MSG = input("MSG: ")
 
+    if not MSG == "break": send(MSG)
+    else: break
 
-if __name__ == '__main__':
-    server_program()
+send(DISCONNECT_MESSAGE)
