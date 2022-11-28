@@ -1,6 +1,9 @@
 
 import pygame
 from sys import exit
+import threading
+import time 
+
 # Display Surface/ The Game window. anything displayed gose on here
 pygame.init()
 #makes screen
@@ -50,6 +53,7 @@ while True:
             if event.key == pygame.K_SPACE:
                 #controls how heigh it gose up
              player_gravity = -20
+             player_gravity = +20 
             player_retc.y += player_gravity
                
                  
@@ -96,11 +100,4 @@ while True:
 
     clock.tick(60)
     #prints fps in terminal
-    print(clock)
-    
-    
-
-
-
-
-
+    print(clock)               
