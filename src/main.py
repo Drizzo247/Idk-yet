@@ -53,7 +53,6 @@ while True:
             if event.key == pygame.K_SPACE:
                 #controls how heigh it gose up
              player_gravity = -20
-             player_gravity = +20 
             player_retc.y += player_gravity
                
                  
@@ -83,8 +82,13 @@ while True:
     player_retc.left += 1
     if snail_rec.right <= 0: snail_rec.left = 800
                                  #left #right
+                        
+    #player
     screen.blit(player_surface,(player_retc))
-
+    player_gravity += 1
+    player_retc.y += player_gravity
+    if player_retc.bottom >= 300: player_retc.bottom = 300
+    screen.blit(player_surface,player_retc)
         #erither get false or true  if get flase no conllison and if get true has conllison
     # if  player_retc.colliderect(snail_rec):
        # print ('collision')
