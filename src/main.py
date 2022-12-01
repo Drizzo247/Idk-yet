@@ -37,6 +37,7 @@ player_retc = player_surface.get_rect( midbottom  = (80,300))
 
 score_rect = score_surface.get_rect(center=(400,50))
 player_gravity = 0
+game_active = True 
 
 
 #main loop
@@ -48,7 +49,7 @@ while True:
             exit()
             
         
-         
+         #key input 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 #controls how heigh it gose up
@@ -64,7 +65,11 @@ while True:
             if player_retc.collidepoint(event.pos):
                 player_gravity = -20
                 player_retc.y += player_gravity
-               
+                
+        else:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                    game_active  =  True 
+                    snail_rec.left = -20
                  
     screen.blit(sky_surface,(0,0))    # Add surface to the screen.
     screen.blit(ground_surface,(0,300))
@@ -74,34 +79,34 @@ while True:
         
 
 
+    if game_active:
+        screen.blit(score_surface,score_rect)
 
-    screen.blit(score_surface,score_rect)
+        snail_rec.x -=1
+        screen.blit(snail_surface,(snail_rec))
+        player_retc.left += 1
+        if snail_rec.right <= 0: snail_rec.left = 800
+                                    #left #right
+                            
+        #player
+        screen.blit(player_surface,(player_retc))
+        player_gravity += 1
+        player_retc.y += player_gravity
+        if player_retc.bottom >= 300: player_retc.bottom = 300
+        screen.blit(player_surface,player_retc)
+            
+        mouse_pos = pygame.mouse.get_pos()
 
-    snail_rec.x -=1
-    screen.blit(snail_surface,(snail_rec))
-    player_retc.left += 1
-    if snail_rec.right <= 0: snail_rec.left = 800
-                                 #left #right
-                        
-    #player
-    screen.blit(player_surface,(player_retc))
-    player_gravity += 1
-    player_retc.y += player_gravity
-    if player_retc.bottom >= 300: player_retc.bottom = 300
-    screen.blit(player_surface,player_retc)
-        #erither get false or true  if get flase no conllison and if get true has conllison
-    # if  player_retc.colliderect(snail_rec):
-       # print ('collision')
-                #gets mouse movment
-    mouse_pos = pygame.mouse.get_pos()
-    # can tell if mouse is clicked/ able to see if what mouse bottone was clicked
-    #if player_retc.collidepoint(( mouse_pos)):
-        #print (pygame.mouse.get_pressed())
+        #draw all our elements/updates everything
+        pygame.display.update()
 
-
-    #draw all our elements/updates everything
-    pygame.display.update()
-
-    clock.tick(60)
-    #prints fps in terminal
-    print(clock)               
+        #collision 
+        if snail_rec.colliderect(player_retc):
+            game_active = False  
+    else:
+        screen.fill('Yellow')    
+    
+    clock.tick(60)               
+    
+#import sound MAKE SURE TO MAKE S CAPTIOAL 
+pygame.mixer.Sound('')
