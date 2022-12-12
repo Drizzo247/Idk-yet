@@ -24,7 +24,9 @@ test_font = pygame.font.Font(None, 50)
                                 #text      #AA    #color/RGB
 score_surface = test_font.render('My Game',False, (64,64,64))
 
-sky_surface= pygame.image.load("Sprites/background.png").convert_alpha()
+#background
+sky_surface= pygame.image.load("Sprites/pixil-frame-0_1.JPEG").convert_alpha()
+
 ground_surface = pygame.image.load("Sprites/ground.png").convert_alpha()
 
                                                         #makes it easier for pygame/ makes game run faster
