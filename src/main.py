@@ -33,7 +33,7 @@ ground_surface = pygame.image.load("Sprites/ground.png").convert_alpha()
 snail_surface = pygame.image.load("Sprites/snail1.png").convert_alpha()
 snail_rec = snail_surface.get_rect( bottomright= (600,300))
 
-player_surface = pygame.image.load("Sprites/player_walk.png").convert_alpha()
+player_surface = pygame.image.load("Sprites/Player_walk.png").convert_alpha()
               #make a rectangle                 #x #y
 player_retc = player_surface.get_rect( midbottom  = (80,300))
 
@@ -103,10 +103,10 @@ while True:
         pygame.display.update()
 
         #collision 
-        if snail_rec.colliderect(player_retc):
-            game_active = False  
-    else:
-        screen.fill('Yellow')    
+        if  snail_rec.colliderect(player_retc):
+            screen.fill('Yellow')
+            game_active = False
+       
     
     clock.tick(60)               
     
