@@ -25,7 +25,7 @@ test_font = pygame.font.Font(None, 50)
 score_surface = test_font.render('My Game',False, (64,64,64))
 
 #background
-sky_surface= pygame.image.load("Sprites/pixil-frame-0_1.JPEG").convert_alpha()
+sky_surface= pygame.image.load("Sprites/Sky.png").convert_alpha()
 
 ground_surface = pygame.image.load("Sprites/ground.png").convert_alpha()
 
@@ -33,7 +33,7 @@ ground_surface = pygame.image.load("Sprites/ground.png").convert_alpha()
 snail_surface = pygame.image.load("Sprites/snail1.png").convert_alpha()
 snail_rec = snail_surface.get_rect( bottomright= (600,300))
 
-player_surface = pygame.image.load("Sprites/Player_walk.png").convert_alpha()
+player_surface = pygame.image.load("Sprites/player_walk_1.png").convert_alpha()
               #make a rectangle                 #x #y
 player_retc = player_surface.get_rect( midbottom  = (80,300))
 
@@ -55,23 +55,19 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 #controls how heigh it gose up
-             player_gravity = -20
+             player_gravity = 2
             player_retc.y += player_gravity
                
                  
         
-                 
                 
-
+       
         if event.type == pygame.MOUSEBUTTONDOWN:
             if player_retc.collidepoint(event.pos):
                 player_gravity = -20
                 player_retc.y += player_gravity
                 
-        else:
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                    game_active  =  True 
-                    snail_rec.left = -20
+        
                  
     screen.blit(sky_surface,(0,0))    # Add surface to the screen.
     screen.blit(ground_surface,(0,300))
@@ -91,11 +87,14 @@ while True:
                                     #left #right
                             
         #player
-        screen.blit(player_surface,(player_retc))
-        player_gravity += 1
+        def player(screen, player_surface, player_retc, player_gravity):
+            screen.blit(player_surface, player_retc)
+            player_gravity += 1
         player_retc.y += player_gravity
-        if player_retc.bottom >= 300: player_retc.bottom = 300
-        screen.blit(player_surface,player_retc)
+        if player_retc.bottom >= 300:
+            player_retc.bottom = 300
+        screen.blit(player_surface, player_retc)
+
             
         mouse_pos = pygame.mouse.get_pos()
 
@@ -103,9 +102,11 @@ while True:
         pygame.display.update()
 
         #collision 
-        if  snail_rec.colliderect(player_retc):
+        if snail_rec.colliderect(player_retc):
             screen.fill('Yellow')
             game_active = False
+
+       
        
     
     clock.tick(60)               
