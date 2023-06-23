@@ -11,7 +11,7 @@ pygame.display.set_caption('Test')
 game_active = True
 
 #game obj 
-background= pygame.image.load("Sprites/End.jep").convert
+background= pygame.image.load("Sprites/End.jep").convert_alpha()
 
 
 

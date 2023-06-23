@@ -51,17 +51,14 @@ while True:
             exit()
             
         
-         #key input 
+            #key input 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 #controls how heigh it gose up
              player_gravity = 2
             player_retc.y += player_gravity
                
-                 
-        
-                
-       
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             if player_retc.collidepoint(event.pos):
                 player_gravity = -20
